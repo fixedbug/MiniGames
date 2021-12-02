@@ -1537,6 +1537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1974898147}
   - component: {fileID: 1974898148}
+  - component: {fileID: 1974898149}
   m_Layer: 5
   m_Name: Pnl_Game
   m_TagString: Untagged
@@ -1572,6 +1573,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974898146}
   m_CullTransparentMesh: 0
+--- !u!114 &1974898149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974898146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8dd7d531e51e264eb3fa0d7f80c0ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridParent: {fileID: 2114323780}
+  gridPrefab: {fileID: 2514886422811362043, guid: 759a839b260273f4f9918ab0874a87de,
+    type: 3}
+  emptyGrids: []
+  numberGridPrefab: {fileID: 1594564209907677713, guid: 0e61a731f63f7f1459b1bead775fc3f2,
+    type: 3}
 --- !u!1 &2114323779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,8 +1602,9 @@ GameObject:
   - component: {fileID: 2114323780}
   - component: {fileID: 2114323782}
   - component: {fileID: 2114323781}
+  - component: {fileID: 2114323783}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Img_GameGrids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1604,10 +1624,10 @@ RectTransform:
   m_Father: {fileID: 1974898147}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 900, y: -1200}
+  m_SizeDelta: {x: 900, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2114323781
 MonoBehaviour:
@@ -1622,7 +1642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7900079, g: 1, b: 0.7877358, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1646,3 +1666,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114323779}
   m_CullTransparentMesh: 0
+--- !u!114 &2114323783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114323779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 233}
+  m_Spacing: {x: 20, y: 35}
+  m_Constraint: 1
+  m_ConstraintCount: 4
