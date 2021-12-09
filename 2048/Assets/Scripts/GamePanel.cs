@@ -11,8 +11,9 @@ public class GamePanel : MonoBehaviour
         Down = 1,
         Left = 2,
         Right = 3,
-    } 
-
+    }
+    // 只允许4X4
+    private static int GRIDNUM = 4;
 
     public Transform gridParent;
 
@@ -56,17 +57,16 @@ public class GamePanel : MonoBehaviour
     // 初始化数字格子
     public void InitGrids()
     {
-        // 只允许4X4
-        int gridNum = 4;
-        grids = new EmptyGrid[gridNum, gridNum];
+
+        grids = new EmptyGrid[GRIDNUM, GRIDNUM];
 
 
         GridLayoutGroup g = gridParent.GetComponent<GridLayoutGroup>();
-        g.constraintCount = gridNum;// 数量赋值，尺寸固定
+        g.constraintCount = GRIDNUM;// 数量赋值，尺寸固定
 
-        for (int i = 0; i < gridNum; i++)
+        for (int i = 0; i < GRIDNUM; i++)
         {
-            for (int j = 0; j < gridNum; j++)
+            for (int j = 0; j < GRIDNUM; j++)
             {
                 grids[i, j] = CreateGrid();
             }
@@ -112,14 +112,179 @@ public class GamePanel : MonoBehaviour
         switch (moveType)
         {
             case MoveType.Left:
+                // 左滑按行向左比对
+                for (int i = 0; i < GRIDNUM; i++)
+                {
+                    //头结点无需比对
+                    for (int j = 1; j < GRIDNUM; j++)
+                    {
+                        // 有数字
+                        if (grids[i, j].IsOccupied())
+                        {
+
+                            NumberGrid ng = grids[i, j].GetNumberGrid();
+
+                            // 向左侧比对
+                            for (int k = j - 1; k >= 0; k--)
+                            {
+                                // 合并
+                                if (grids[i,k].IsOccupied())
+                                {
+                                    //数字相同才需要有动作
+                                    if(grids[i, k].GetNumberGrid().GetNum() == ng.GetNum())
+                                    {
+                                        grids[i, k].GetNumberGrid().MergeGrid();
+                                        ng.GetGrid().SetNumberGrid(null);
+                                        GameObject.Destroy(ng.gameObject);
+                                        break;
+                                    }
+                                }
+                                // 数字不同，移动
+                                else
+                                {
+                                    ng.MoveToGrid(grids[i, k]);
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
                 break;
             case MoveType.Right:
+                // 右滑按行向右对比
+                for (int i = 0; i < GRIDNUM; i++)
+                {
+                    //向左遍历
+                    for (int j = GRIDNUM - 2; j >= 0; j--)
+                    {
+                        // 有数字
+                        if (grids[i, j].IsOccupied())
+                        {
+
+                            NumberGrid ng = grids[i, j].GetNumberGrid();
+
+                            // 向右侧比对
+                            for (int k = j + 1; k < GRIDNUM; k++)
+                            {
+                                // 合并
+                                if (grids[i, k].IsOccupied())
+                                {
+                                    //数字相同才需要有动作
+                                    if (grids[i, k].GetNumberGrid().GetNum() == ng.GetNum())
+                                    {
+                                        grids[i, k].GetNumberGrid().MergeGrid();
+                                        ng.GetGrid().SetNumberGrid(null);
+                                        GameObject.Destroy(ng.gameObject);
+                                        break;
+                                    }
+                                }
+                                // 数字不同，移动
+                                else
+                                {
+                                    ng.MoveToGrid(grids[i, k]);
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
                 break;
             case MoveType.Up:
+                // 上滑按列向下对比
+                for (int i = 0; i < GRIDNUM; i++)
+                {
+                    //向左遍历
+                    for (int j = 1; j < GRIDNUM; j++)
+                    {
+                        // 有数字
+                        if (grids[j, i].IsOccupied())
+                        {
+
+                            NumberGrid ng = grids[j, i].GetNumberGrid();
+
+                            // 向右侧比对
+                            for (int k = j - 1; k < j; k++)
+                            {
+                                // 合并
+                                if (grids[k, i].IsOccupied())
+                                {
+                                    //数字相同才需要有动作
+                                    if (grids[k, i].GetNumberGrid().GetNum() == ng.GetNum())
+                                    {
+                                        grids[k, i].GetNumberGrid().MergeGrid();
+                                        ng.GetGrid().SetNumberGrid(null);
+                                        GameObject.Destroy(ng.gameObject);
+                                        break;
+                                    }
+                                }
+                                // 数字不同，移动
+                                else
+                                {
+                                    ng.MoveToGrid(grids[k, i]);
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
                 break;
             case MoveType.Down:
+                // 下滑按列向上对比
+                for (int i = 0; i < GRIDNUM; i++)
+                {
+                    //遍历
+                    for (int j = GRIDNUM - 2; j >= 0; j--)
+                    {
+                        // 有数字
+                        if (grids[j, i].IsOccupied())
+                        {
+
+                            NumberGrid ng = grids[j, i].GetNumberGrid();
+
+                            // 向上比对
+                            for (int k = GRIDNUM - 1; k > j; k--)
+                            {
+                                // 合并
+                                if (grids[k, i].IsOccupied())
+                                {
+                                    //数字相同才需要有动作
+                                    if (grids[k, i].GetNumberGrid().GetNum() == ng.GetNum())
+                                    {
+                                        grids[k, i].GetNumberGrid().MergeGrid();
+                                        ng.GetGrid().SetNumberGrid(null);
+                                        GameObject.Destroy(ng.gameObject);
+                                        break;
+                                    }
+                                }
+                                // 数字不同，移动
+                                else
+                                {
+                                    ng.MoveToGrid(grids[k, i]);
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+                }
                 break;
 
         }
+
+        CreateNumberGrid();
+        CreateNumberGrid();
     }
+
+
 }

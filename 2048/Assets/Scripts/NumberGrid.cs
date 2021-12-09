@@ -44,4 +44,18 @@ public class NumberGrid : MonoBehaviour
         if (this.grid == null) throw new NullReferenceException();
         return this.grid;
     }
+
+    public void MoveToGrid(EmptyGrid grid)
+    {
+        transform.SetParent(grid.transform);
+        transform.localPosition = Vector3.zero;
+        this.GetGrid().SetNumberGrid(null);
+        grid.SetNumberGrid(this);
+        this.SetGrid(grid);
+    }
+
+    public void MergeGrid()
+    {
+        this.SetNum(this.GetNum() * 2);
+    }
 }
