@@ -10,10 +10,18 @@ public class NumberGrid : MonoBehaviour
     private Text num;
     private EmptyGrid grid;
 
+    private float scaletTime = 0;
+
     public void Awake()
     {
         bg = GetComponent<Image>();
         num = transform.Find("Txt_Number").GetComponent<Text>();
+    }
+
+    public void Update()
+    {
+        scaletTime += Time.deltaTime * 4;
+        transform.localScale = Vector3.Lerp(Vector3.zero,Vector3.one, scaletTime);
     }
 
     public void Init(EmptyGrid grid)
@@ -22,6 +30,8 @@ public class NumberGrid : MonoBehaviour
         this.SetGrid(grid);
 
         this.SetNum(2);
+
+        transform.localScale = Vector3.zero;
     }
 
     private void SetGrid(EmptyGrid grid)

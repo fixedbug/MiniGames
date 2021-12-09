@@ -112,7 +112,6 @@ public class GamePanel : MonoBehaviour
         switch (moveType)
         {
             case MoveType.Left:
-                // 左滑按行向左比对
                 for (int i = 0; i < GRIDNUM; i++)
                 {
                     //头结点无需比对
@@ -125,7 +124,7 @@ public class GamePanel : MonoBehaviour
                             NumberGrid ng = grids[i, j].GetNumberGrid();
 
                             // 向左侧比对
-                            for (int k = j - 1; k >= 0; k--)
+                            for (int k = 0; k < j; k++)
                             {
                                 // 合并
                                 if (grids[i,k].IsOccupied())
@@ -143,6 +142,7 @@ public class GamePanel : MonoBehaviour
                                 else
                                 {
                                     ng.MoveToGrid(grids[i, k]);
+                                    break;
                                 }
 
                             }
@@ -154,7 +154,6 @@ public class GamePanel : MonoBehaviour
                 }
                 break;
             case MoveType.Right:
-                // 右滑按行向右对比
                 for (int i = 0; i < GRIDNUM; i++)
                 {
                     //向左遍历
@@ -167,7 +166,7 @@ public class GamePanel : MonoBehaviour
                             NumberGrid ng = grids[i, j].GetNumberGrid();
 
                             // 向右侧比对
-                            for (int k = j + 1; k < GRIDNUM; k++)
+                            for (int k = GRIDNUM - 1; k > j; k--)
                             {
                                 // 合并
                                 if (grids[i, k].IsOccupied())
@@ -185,6 +184,7 @@ public class GamePanel : MonoBehaviour
                                 else
                                 {
                                     ng.MoveToGrid(grids[i, k]);
+                                    break;
                                 }
 
                             }
@@ -196,7 +196,6 @@ public class GamePanel : MonoBehaviour
                 }
                 break;
             case MoveType.Up:
-                // 上滑按列向下对比
                 for (int i = 0; i < GRIDNUM; i++)
                 {
                     //向左遍历
@@ -209,7 +208,7 @@ public class GamePanel : MonoBehaviour
                             NumberGrid ng = grids[j, i].GetNumberGrid();
 
                             // 向右侧比对
-                            for (int k = j - 1; k < j; k++)
+                            for (int k = 0; k < j; k++)
                             {
                                 // 合并
                                 if (grids[k, i].IsOccupied())
@@ -227,6 +226,7 @@ public class GamePanel : MonoBehaviour
                                 else
                                 {
                                     ng.MoveToGrid(grids[k, i]);
+                                    break;
                                 }
 
                             }
@@ -238,7 +238,6 @@ public class GamePanel : MonoBehaviour
                 }
                 break;
             case MoveType.Down:
-                // 下滑按列向上对比
                 for (int i = 0; i < GRIDNUM; i++)
                 {
                     //遍历
@@ -269,6 +268,7 @@ public class GamePanel : MonoBehaviour
                                 else
                                 {
                                     ng.MoveToGrid(grids[k, i]);
+                                    break;
                                 }
 
                             }
