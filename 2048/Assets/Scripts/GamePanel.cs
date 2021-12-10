@@ -109,6 +109,9 @@ public class GamePanel : MonoBehaviour
 
     public void Move(MoveType moveType)
     {
+        // FIXME:不能越过中间的格子合并
+        // FIXME:合并过的不能连续合并
+
         switch (moveType)
         {
             case MoveType.Left:
@@ -129,7 +132,28 @@ public class GamePanel : MonoBehaviour
                                 // 合并
                                 if (grids[i,k].IsOccupied())
                                 {
-                                    //数字相同才需要有动作
+                                    // 中间还存在有数字的格子，不能合并
+                                    bool flag = false;
+                                    for(int l = k + 1; l < j-1; l++)
+                                    {
+                                        if (grids[i,l].IsOccupied())
+                                        {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if(flag == true)
+                                    {
+                                        continue;
+                                    }
+
+                                    // 已合并过的不能合并
+                                    if(grids[i, k].GetNumberGrid().GetMerged() == true)
+                                    {
+                                        continue;
+                                    }
+
+                                    // 数字相同才需要有动作
                                     if(grids[i, k].GetNumberGrid().GetNum() == ng.GetNum())
                                     {
                                         grids[i, k].GetNumberGrid().MergeGrid();
@@ -171,6 +195,27 @@ public class GamePanel : MonoBehaviour
                                 // 合并
                                 if (grids[i, k].IsOccupied())
                                 {
+                                    // 中间还存在有数字的格子，不能合并
+                                    bool flag = false;
+                                    for (int l = k - 1; l > j + 1; l--)
+                                    {
+                                        if (grids[i, l].IsOccupied())
+                                        {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (flag == true)
+                                    {
+                                        continue;
+                                    }
+
+                                    // 已合并过的不能合并
+                                    if (grids[i, k].GetNumberGrid().GetMerged() == true)
+                                    {
+                                        continue;
+                                    }
+
                                     //数字相同才需要有动作
                                     if (grids[i, k].GetNumberGrid().GetNum() == ng.GetNum())
                                     {
@@ -213,6 +258,27 @@ public class GamePanel : MonoBehaviour
                                 // 合并
                                 if (grids[k, i].IsOccupied())
                                 {
+                                    // 中间还存在有数字的格子，不能合并
+                                    bool flag = false;
+                                    for (int l = k + 1; l < j - 1; l++)
+                                    {
+                                        if (grids[l, i].IsOccupied())
+                                        {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (flag == true)
+                                    {
+                                        continue;
+                                    }
+
+                                    // 已合并过的不能合并
+                                    if (grids[k, i].GetNumberGrid().GetMerged() == true)
+                                    {
+                                        continue;
+                                    }
+
                                     //数字相同才需要有动作
                                     if (grids[k, i].GetNumberGrid().GetNum() == ng.GetNum())
                                     {
@@ -255,6 +321,27 @@ public class GamePanel : MonoBehaviour
                                 // 合并
                                 if (grids[k, i].IsOccupied())
                                 {
+                                    // 中间还存在有数字的格子，不能合并
+                                    bool flag = false;
+                                    for (int l = k - 1; l > j + 1; l--)
+                                    {
+                                        if (grids[l, i].IsOccupied())
+                                        {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (flag == true)
+                                    {
+                                        continue;
+                                    }
+
+                                    // 已合并过的不能合并
+                                    if (grids[k, i].GetNumberGrid().GetMerged() == true)
+                                    {
+                                        continue;
+                                    }
+
                                     //数字相同才需要有动作
                                     if (grids[k, i].GetNumberGrid().GetNum() == ng.GetNum())
                                     {
@@ -284,6 +371,14 @@ public class GamePanel : MonoBehaviour
 
         CreateNumberGrid();
         CreateNumberGrid();
+
+        foreach(var item in grids)
+        {
+            if(item.GetNumberGrid() != null)
+            {
+                item.GetNumberGrid().SetMerged(false);
+            }
+        }
     }
 
 
