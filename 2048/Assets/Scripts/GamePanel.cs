@@ -36,6 +36,12 @@ public class GamePanel : MonoBehaviour
 
     void Update()
     {
+        // 游戏结束的操作
+        if (!IsPlayable())
+        {
+            
+        };
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Move(MoveType.Up);
@@ -52,6 +58,35 @@ public class GamePanel : MonoBehaviour
         {
             Move(MoveType.Right);
         }
+    }
+
+    private bool IsPlayable()
+    {
+
+        foreach(var item in grids)
+        {
+            if(item.GetNumberGrid() == null)
+            {
+                return true;
+            }
+        }
+
+        for(int i = 0;i < GRIDNUM-1; i++)
+        {
+            for(int j = 0;j < GRIDNUM-1; j++)
+            {
+                if(grids[i,j].GetNumberGrid().GetNum() == grids[i, j + 1].GetNumberGrid().GetNum())
+                {
+                    return true;
+                }
+                if(grids[i, j].GetNumberGrid().GetNum() == grids[i+1, j].GetNumberGrid().GetNum())
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     // 初始化数字格子
@@ -109,8 +144,6 @@ public class GamePanel : MonoBehaviour
 
     public void Move(MoveType moveType)
     {
-        // FIXME:不能越过中间的格子合并
-        // FIXME:合并过的不能连续合并
 
         switch (moveType)
         {
