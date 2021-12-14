@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverCanvas;
     public GameObject bird;
+    public float speedUpScale;
+
 
     private void Start()
     {
@@ -36,5 +38,10 @@ public class GameManager : MonoBehaviour
     {
         gameOverCanvas.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void Update()
+    {
+        Time.timeScale += Time.deltaTime * speedUpScale;
     }
 }
