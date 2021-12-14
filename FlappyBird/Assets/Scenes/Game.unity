@@ -813,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 2104389082}
   bird: {fileID: 1922620739}
+  speedUpScale: 0.01
 --- !u!4 &1430889489
 Transform:
   m_ObjectHideFlags: 0
