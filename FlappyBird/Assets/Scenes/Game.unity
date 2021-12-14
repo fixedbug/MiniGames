@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 1257396827}
   - component: {fileID: 1257396826}
   - component: {fileID: 1257396825}
+  - component: {fileID: 1257396828}
   m_Layer: 5
   m_Name: Button Start
   m_TagString: Untagged
@@ -589,9 +590,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 836772245}
+      - m_Target: {fileID: 2104389082}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1257396828}
+        m_MethodName: OnStartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -638,6 +650,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257396823}
   m_CullTransparentMesh: 0
+--- !u!114 &1257396828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257396823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfd7cd07ec5b5a40b68a851f23badd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 1430889488}
 --- !u!1 &1424585576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1337,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!212 &1922620741
 SpriteRenderer:
   m_ObjectHideFlags: 0

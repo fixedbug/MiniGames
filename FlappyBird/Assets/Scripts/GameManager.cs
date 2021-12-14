@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameStart");
         Time.timeScale = 1f;
 
-        // 鸟归位
+        // 鸟归位，动力清空
         bird.transform.position = new Vector3(0, 1f, 0);
         bird.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         bird.GetComponent<Rigidbody2D>().angularVelocity = 0f;
